@@ -6,7 +6,7 @@ from pylearn2.config import yaml_parse
 
 #model = pickle.load(open('mlp_best3.pkl', 'rb'))
 
-with open(os.path.join('mlp.yaml'), 'r') as f:
+with open(os.path.join('mlp3.yaml'), 'r') as f:
     train = f.read()
 
 print train

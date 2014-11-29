@@ -5,16 +5,20 @@ import pandas as pd
 
 from sklearn.ensemble import GradientBoostingClassifier
 
-df = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/training.csv', index_col='EventId')
-X_test = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/test.csv', index_col='EventId')
+#df = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/training.csv', index_col='EventId')
+#X_test = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/test.csv', index_col='EventId')
+df = pd.read_csv('/home/marik0/repos/kaggle/higgs/pylearn/scaled_train.csv', index_col='EventId')
+X_test = pd.read_csv('/home/marik0/repos/kaggle/higgs/pylearn/scaled_test.csv', index_col='EventId')
 
 y = df['Label']
-weights = df['Weight']
-X = df.drop(['Label', 'Weight'], axis=1)
+weights = df['Weights']
+X = df.drop(['Label', 'Weights'], axis=1)
 
-clf = GradientBoostingClassifier(n_estimators=80,
-                                 max_depth=10,
-                                 min_samples_leaf=200,
+print np.shape(X)
+
+clf = GradientBoostingClassifier(n_estimators=150,
+                                 max_depth=12,
+                                 min_samples_leaf=240,
                                  max_features=10,
                                  verbose=1).fit(X, y)
 
@@ -25,8 +29,8 @@ rank_order = np.argsort(p) + 1
 
 # Create the class column
 cl = np.empty(len(X_test), dtype=np.object)
-cl[p > 0.8] = 's'
-cl[p <= 0.8] = 'b'
+cl[p > 0.9] = 's'
+cl[p <= 0.9] = 'b'
 
 # Get the event Id from the initial data frame
 ids = X_test.index.values

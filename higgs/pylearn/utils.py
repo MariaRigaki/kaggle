@@ -27,7 +27,8 @@ def load_data(start, stop):
         The start and stop parameters are useful for splitting the data into
         train, validation, and test data.
     """
-    df = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/training.csv', index_col='EventId')
+    #df = pd.read_csv('/home/marik0/repos/kaggle/higgs/data/training.csv', index_col='EventId')
+    df = pd.read_csv('new_train.csv', index_col='EventId')
 
     labels = df['Label']
     f = lambda x: 1 if x == 's' else -1

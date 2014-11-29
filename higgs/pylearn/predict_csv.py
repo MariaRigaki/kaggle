@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     print "writing predictions..."
 
-    res_df = pd.DataFrame({"EventId": df.EventId, "RankOrder": sorted_probs, "Class": yy})
+    res_df = pd.DataFrame({"EventId": df.EventId, "RankOrder": rank_order, "Class": yy})
     res_df.to_csv(out_path, index=False, columns=["EventId", "RankOrder", "Class"])
 
 
